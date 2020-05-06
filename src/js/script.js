@@ -60,9 +60,10 @@
 
       thisProduct.id = id;
       thisProduct.data = data;
+      console.log('new Product:', thisProduct);
 
       thisProduct.renderInMenu();
-      console.log('new Product:', thisProduct);
+      thisProduct.initAccordion();
     }
 
     renderInMenu(){
@@ -76,7 +77,34 @@
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
+
+    initAccordion(){
+      const thisProduct = this;
+  
+      /* find the clickable trigger (the element that should react to clicking) */
+  
+      /* START: click event listener to trigger */
+  
+        /* prevent default action for event */
+  
+        /* toggle active class on element of thisProduct */
+  
+        /* find all active products */
+  
+        /* START LOOP: for each active product */
+  
+          /* START: if the active product isn't the element of thisProduct */
+  
+            /* remove class active for the active product */
+  
+          /* END: if the active product isn't the element of thisProduct */
+  
+        /* END LOOP: for each active product */
+  
+      /* END: click event listener to trigger */
+    }
   }
+  
 
   
 
