@@ -143,22 +143,31 @@
     processOrder(){
       const thisProduct = this;
       console.log(this.processOrder.name);
-
+      thisProduct.params = {};
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('formDara', formData);
-
       let price = thisProduct.data.price;
       console.log('price', price);
+      let params = thisProduct.data.params;
+      
+      for(let paramID of params){
+        console.log('paramID', paramID);
+        const param = params[paramID];
+        for(let optionId in param.options){
+          const option = param.options[optionId];
+          const optionSelected = formData.hasOwnProperty(paramID) && formData[paramID].indexOf(optionId) > -1;
+          if(optionSelected && !option.default){
+            price += option.price;	
+          }  else if(!optionSelected && option.default){
+            price -= option.price;
+          }
+        }
 
-      for (let param of price){
-        console.log('param', param);
+
+        price = thisProduct.priceElem;
       }
-
-
-      price = thisProduct.priceElem;
     }
   }
-  
 
   
 
