@@ -148,11 +148,11 @@
       console.log('formDara', formData);
       let price = thisProduct.data.price;
       console.log('price', price);
-      let params = thisProduct.data.params;
+      // let params = thisProduct.data.params;
       
-      for(let paramID of params){
+      for(let paramID in thisProduct.data.params){
         console.log('paramID', paramID);
-        const param = params[paramID];
+        const param = thisProduct.data.params[paramID];
         for(let optionId in param.options){
           const option = param.options[optionId];
           const optionSelected = formData.hasOwnProperty(paramID) && formData[paramID].indexOf(optionId) > -1;
@@ -164,7 +164,8 @@
         }
 
 
-        price = thisProduct.priceElem;
+        thisProduct.priceElem.innerHTML = price;
+        console.log(price);
       }
     }
   }
