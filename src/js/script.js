@@ -177,9 +177,11 @@
           }
         }
         //nie dziala
+        console.log('price 1', price);
         price*= thisProduct.amountWidget.value;
+        console.log('price 2', price);
         thisProduct.priceElem.innerHTML = price;
-        console.log(price);
+        console.log('price 3', price);
       }
     }
 
