@@ -163,16 +163,9 @@
             price -= option.price;
           }
 
-          /*OMÓWIĆ*/
           const activeImages = thisProduct.imageWrapper.querySelectorAll('.' + paramID + '-' + optionId);  
           if(optionSelected) {
-            // if(!thisProduct.params[paramID]) {
-            //   thisProduct.params[paramID] = {
-            //     label: param.label,
-            //     options: {},
-            //   };
-            // }
-            // thisProduct.params[paramID].options[optionId] = option.label;
+            thisProduct.params[paramID].options[optionId] = option.label;
             for(let activeImage of activeImages) {
               activeImage.classList.add(classNames.menuProduct.imageVisible);
             }
