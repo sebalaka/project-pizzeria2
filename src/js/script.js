@@ -163,7 +163,16 @@
             price -= option.price;
           }
 
-        
+          const activeImages = thisProduct.imageWrapper.querySelectorAll('.' + paramID + '-' + optionId);  
+          if(optionSelected) {
+            for(let activeImage of activeImages) {
+              activeImage.classList.add(classNames.menuProduct.imageVisible);
+            }
+          } else {
+            for (let activeImage of activeImages) {
+              activeImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
         }
 
         thisProduct.priceElem.innerHTML = price;
