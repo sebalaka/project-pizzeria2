@@ -400,7 +400,7 @@
       const index = thisCart.products.indexOf(cartProduct);
       console.log('index', index);
       console.log('value at index', thisCart.products[index]);
-      const splyce2 = thisCart.products.splice(index);
+      const splyce2 = thisCart.products.splice(index, 1);
       console.log('splyce2', splyce2);
       cartProduct.dom.wrapper.remove();
 
