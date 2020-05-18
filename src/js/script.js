@@ -228,7 +228,7 @@
 
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = thisProduct.price;
-      console.log('label params', thisProduct.params);
+      //console.log('label params', thisProduct.params);
     }
 
     initAmountWidget() {
@@ -325,7 +325,7 @@
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       // console.log('test', thisCart.dom.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
-      console.log('test', thisCart.dom.productList);
+      //console.log('test', thisCart.dom.productList);
     }
 
     initActions() {
@@ -337,21 +337,21 @@
 
     add(menuProduct) {
       const thisCart = this;
-      console.log('adding product', menuProduct);
+      //console.log('adding product', menuProduct);
       /* generate HTML based on template*/
       const generatedHTML = templates.cartProduct(menuProduct);
-      console.log('html', generatedHTML);
+      //console.log('html', generatedHTML);
       /* create element using utils.createElementFromHTML */
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-      console.log('dom', generatedDOM);
+      //console.log('dom', generatedDOM);
       /* add element to menu */
       const cartContainer = thisCart.dom.productList;
-      console.log('cart container', cartContainer);
+      //console.log('cart container', cartContainer);
       cartContainer.appendChild(generatedDOM);
-      console.log('cart container 2', cartContainer);
+      //console.log('cart container 2', cartContainer);
       //9.4
-      thisCart.products.push(menuProduct);
-      console.log('this cart products', thisCart.products);
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+      //console.log('this cart products', thisCart.products);
     }
   }
 
@@ -364,8 +364,11 @@
       thisCartProduct.priceSingle = menuProduct.priceSingle;
       thisCartProduct.amount = menuProduct.amount;
       thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
-      thisCart.getElements(element);
-      console.log('thisCartProduct', thisCartProduct);
+      thisCartProduct.getElements(element);
+      // console.log('thisCartProduct', thisCartProduct);
+      // console.log('productData', menuProduct);
+      thisCartProduct.initAmountWidget();
+      
     }
 
     getElements(element) {
@@ -377,12 +380,24 @@
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
     }
+
+    initAmountWidget() {
+      const thisCartProduct = this;
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+      thisCartProduct.dom.amountWidget.addEventListener('updated', function () {
+        thisCartProduct.amount = thisCartProduct.amountWidget.value;
+        thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
+
+        thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+        // console.log('test', thisCartProduct.dom.price.innerHTML);
+      });
+    }
   }
 
   const app = {
     initMenu: function () {
       const thisApp = this;
-      console.log('This app', thisApp.data);
+      //console.log('This app', thisApp.data);
 
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
@@ -403,11 +418,11 @@
 
     init: function () {
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      //console.log('*** App starting ***');
+      //console.log('thisApp:', thisApp);
+      //console.log('classNames:', classNames);
+      //console.log('settings:', settings);
+      //console.log('templates:', templates);
       thisApp.initData();
       thisApp.initMenu();
       thisApp.initCart();
