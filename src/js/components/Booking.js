@@ -54,10 +54,10 @@ export class Booking {
     };
 
     Promise.all([
-        fetch(urls.booking),
-        fetch(urls.eventsCurrent),
-        fetch(urls.eventsRepeat),
-      ])
+      fetch(urls.booking),
+      fetch(urls.eventsCurrent),
+      fetch(urls.eventsRepeat),
+    ])
       .then(function (allResponses) {
         const bookingResponse = allResponses[0];
         const eventsCurrentResponse = allResponses[1];
@@ -133,15 +133,20 @@ export class Booking {
 
     let allAvailable = false;
 
-    if (typeof thisBooking.booked[thisBooking.date] == 'undefined' || typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined') {
+    if (typeof thisBooking.booked[thisBooking.date] == 'undefined' 
+        ||
+        typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'
+    ){
       allAvailable = true;
     }
     for (let table of thisBooking.dom.tables) {
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
       if (!isNaN(tableId)) {
-        numberTable = parseInt(numberTable);
+        tableId = parseInt(tableId);
       }
-      if (!allAvailable && thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId) > -1) {
+      if (!allAvailable 
+        && 
+        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)){
         table.classList.add(classNames.booking.tableBooked);
       } else {
         table.classList.remove(classNames.booking.tableBooked);
