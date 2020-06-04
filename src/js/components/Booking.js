@@ -1,7 +1,8 @@
 import {
   templates,
   select,
-  settings
+  settings,
+  classNames
 } from '../settings.js';
 import utils from '../utils.js';
 import AmountWidget from './AmountWidget.js';
@@ -98,7 +99,7 @@ export class Booking {
         }
       }
     }
-
+    thisBooking.updateDOM();
     // console.log('thisbooking', thisBooking.booked);
   }
 
@@ -160,6 +161,8 @@ export class Booking {
     thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
+    thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
+    thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
   }
 
   initWidgets() {
@@ -169,5 +172,9 @@ export class Booking {
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
     console.log('date', thisBooking.datePicker);
+
+    thisBooking.dom.wrapper.addEventListener('updated', function () {
+      thisBooking.updateDOM();
+    });
   }
 }
