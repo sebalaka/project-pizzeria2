@@ -41,7 +41,7 @@ export const select = {
       output: '.output',
     },
   },
- 
+
   // CODE ADDED START
   cart: {
     productList: '.cart__order-summary',
@@ -65,6 +65,7 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
+    form: 'form',
   },
   nav: {
     links: '.main-nav a',
