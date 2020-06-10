@@ -174,10 +174,21 @@ export class Booking {
     const url = settings.db.url + '/' + settings.db.booking;
 
     const bookPayload = {
-      test: 'test',
       date: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
       table: thisBooking.selectorTable,
+      people: thisBooking.peopleAmount.value,
+      duration: thisBooking.hoursAmount.value,
+      starters: [],
+      phone: thisBooking.dom.phone.value,
+      address: thisBooking.dom.address.value,
     };
+
+    for (let starter of thisBooking.dom.starters) {
+      if (starter.checked == true) {
+        bookPayload.starters.push(starter.value);
+      }
+    }
 
     const options = {
       method: 'POST',
@@ -209,6 +220,10 @@ export class Booking {
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     thisBooking.dom.form = thisBooking.dom.wrapper.querySelector(select.booking.form);
+    thisBooking.dom.submitButton = thisBooking.dom.wrapper.querySelector(select.booking.bookTable);
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector('input[name="phone"]');
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
+    thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
   }
 
   initWidgets() {
