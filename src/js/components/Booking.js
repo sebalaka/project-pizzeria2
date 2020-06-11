@@ -20,6 +20,7 @@ export class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.selectTable();
+    thisBooking.test();
   }
 
   getData() {
@@ -151,6 +152,10 @@ export class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+
+
+
+    //// zad 11.2.2
   }
 
   selectTable() {
@@ -159,14 +164,29 @@ export class Booking {
     console.log(thisBooking.date);
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
     console.log(thisBooking.hour);
-    //3 nasluchiwacze
     for (let table of thisBooking.dom.tables) {
       table.addEventListener('click', function (event) {
         event.preventDefault();
+        //if table.classList.contains(//select.booked)
         const tableId = parseInt(table.getAttribute('data-table'));
         thisBooking.selectorTable = tableId;
       });
     }
+
+
+  }
+
+  test() {
+    const thisBooking = this;
+    const testTables = thisBooking.dom.wrapper.querySelectorAll('.floor-plan .table');
+
+    testTables.forEach(testTable => {
+      testTable.addEventListener('click', function () {
+        testTables.forEach(tbl => tbl.classList.remove('active'));
+        this.classList.add('active');
+        console.log('test active');
+      });
+    });
   }
 
   sendBooking() {
